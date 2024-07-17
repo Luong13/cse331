@@ -1,0 +1,72 @@
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var assert = __importStar(require("assert"));
+var list_1 = require("./list");
+//import { getNumbers } from './number_set';
+var query_1 = require("./query");
+var eval_1 = require("./eval");
+describe('eval', function () {
+    it('evaluate', function () {
+        // TODO (1e): change to use .getNumbers()
+        // TODO (5e): pass range arguments to getNumbers calls.
+        //            For each case, use the min and max passed to evaluate
+        assert.deepEqual((0, eval_1.evaluate)(query_1.even, 1, 10).getNumbers(), (0, list_1.explode_array)([2, 4, 6, 8, 10]));
+        assert.deepEqual((0, eval_1.evaluate)((0, query_1.not)(query_1.even), 1, 10).getNumbers(), (0, list_1.explode_array)([1, 3, 5, 7, 9]));
+        assert.deepEqual((0, eval_1.evaluate)((0, query_1.and)((0, query_1.not)(query_1.even), query_1.fibonacci), 1, 15).getNumbers(), (0, list_1.explode_array)([1, 3, 5, 13]));
+        assert.deepEqual((0, eval_1.evaluate)((0, query_1.or)(query_1.even, (0, query_1.not)(query_1.prime)), 2, 15).getNumbers(), (0, list_1.explode_array)([2, 4, 6, 8, 9, 10, 12, 14, 15]));
+    });
+    it('getAll', function () {
+        assert.deepEqual((0, eval_1.getAll)(6, 5), (0, list_1.explode_array)([]));
+        assert.deepEqual((0, eval_1.getAll)(5, 5), (0, list_1.explode_array)([5]));
+        assert.deepEqual((0, eval_1.getAll)(1, 5), (0, list_1.explode_array)([1, 2, 3, 4, 5]));
+        assert.deepEqual((0, eval_1.getAll)(3, 8), (0, list_1.explode_array)([3, 4, 5, 6, 7, 8]));
+    });
+    it('getEvens', function () {
+        assert.deepEqual((0, eval_1.getEvens)(6, 5), (0, list_1.explode_array)([]));
+        assert.deepEqual((0, eval_1.getEvens)(5, 5), (0, list_1.explode_array)([]));
+        assert.deepEqual((0, eval_1.getEvens)(6, 6), (0, list_1.explode_array)([6]));
+        assert.deepEqual((0, eval_1.getEvens)(1, 5), (0, list_1.explode_array)([2, 4]));
+        assert.deepEqual((0, eval_1.getEvens)(1, 6), (0, list_1.explode_array)([2, 4, 6]));
+        assert.deepEqual((0, eval_1.getEvens)(2, 10), (0, list_1.explode_array)([2, 4, 6, 8, 10]));
+    });
+    it('getPrimes', function () {
+        assert.deepEqual((0, eval_1.getPrimes)(6, 5), (0, list_1.explode_array)([]));
+        assert.deepEqual((0, eval_1.getPrimes)(5, 5), (0, list_1.explode_array)([5]));
+        assert.deepEqual((0, eval_1.getPrimes)(6, 6), (0, list_1.explode_array)([]));
+        assert.deepEqual((0, eval_1.getPrimes)(1, 5), (0, list_1.explode_array)([2, 3, 5]));
+        assert.deepEqual((0, eval_1.getPrimes)(1, 7), (0, list_1.explode_array)([2, 3, 5, 7]));
+        assert.deepEqual((0, eval_1.getPrimes)(3, 15), (0, list_1.explode_array)([3, 5, 7, 11, 13]));
+    });
+    it('getFibonacci', function () {
+        assert.deepEqual((0, eval_1.getFibonacci)(6, 5), (0, list_1.explode_array)([]));
+        assert.deepEqual((0, eval_1.getFibonacci)(5, 5), (0, list_1.explode_array)([5]));
+        assert.deepEqual((0, eval_1.getFibonacci)(6, 6), (0, list_1.explode_array)([]));
+        assert.deepEqual((0, eval_1.getFibonacci)(1, 5), (0, list_1.explode_array)([1, 2, 3, 5]));
+        assert.deepEqual((0, eval_1.getFibonacci)(2, 7), (0, list_1.explode_array)([2, 3, 5]));
+        assert.deepEqual((0, eval_1.getFibonacci)(3, 15), (0, list_1.explode_array)([3, 5, 8, 13]));
+    });
+});
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXZhbF90ZXN0LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiLi4vc3JjL2V2YWxfdGVzdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBQUEsNkNBQWlDO0FBQ2pDLCtCQUF1QztBQUN2Qyw0Q0FBNEM7QUFDNUMsaUNBQStEO0FBQy9ELCtCQUE2RTtBQUc3RSxRQUFRLENBQUMsTUFBTSxFQUFFO0lBRWYsRUFBRSxDQUFDLFVBQVUsRUFBRTtRQUNiLHlDQUF5QztRQUN6Qyx1REFBdUQ7UUFDdkQsbUVBQW1FO1FBQ25FLE1BQU0sQ0FBQyxTQUFTLENBQUMsSUFBQSxlQUFRLEVBQUMsWUFBSSxFQUFFLENBQUMsRUFBRSxFQUFFLENBQUMsQ0FBQyxVQUFVLEVBQUUsRUFDL0MsSUFBQSxvQkFBYSxFQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsRUFBRSxDQUFDLEVBQUUsQ0FBQyxFQUFFLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUNyQyxNQUFNLENBQUMsU0FBUyxDQUFDLElBQUEsZUFBUSxFQUFDLElBQUEsV0FBRyxFQUFDLFlBQUksQ0FBQyxFQUFFLENBQUMsRUFBRSxFQUFFLENBQUMsQ0FBQyxVQUFVLEVBQUUsRUFDcEQsSUFBQSxvQkFBYSxFQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsRUFBRSxDQUFDLEVBQUUsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUNwQyxNQUFNLENBQUMsU0FBUyxDQUFDLElBQUEsZUFBUSxFQUFDLElBQUEsV0FBRyxFQUFDLElBQUEsV0FBRyxFQUFDLFlBQUksQ0FBQyxFQUFFLGlCQUFTLENBQUMsRUFBRSxDQUFDLEVBQUUsRUFBRSxDQUFDLENBQUMsVUFBVSxFQUFFLEVBQ3BFLElBQUEsb0JBQWEsRUFBQyxDQUFDLENBQUMsRUFBRSxDQUFDLEVBQUUsQ0FBQyxFQUFFLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUNsQyxNQUFNLENBQUMsU0FBUyxDQUFDLElBQUEsZUFBUSxFQUFDLElBQUEsVUFBRSxFQUFDLFlBQUksRUFBRSxJQUFBLFdBQUcsRUFBQyxhQUFLLENBQUMsQ0FBQyxFQUFFLENBQUMsRUFBRSxFQUFFLENBQUMsQ0FBQyxVQUFVLEVBQUUsRUFDL0QsSUFBQSxvQkFBYSxFQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsRUFBRSxDQUFDLEVBQUUsQ0FBQyxFQUFFLENBQUMsRUFBRSxFQUFFLEVBQUUsRUFBRSxFQUFFLEVBQUUsRUFBRSxFQUFFLENBQUMsQ0FBQyxDQUFDLENBQUM7SUFDdEQsQ0FBQyxDQUFDLENBQUM7SUFFSCxFQUFFLENBQUMsUUFBUSxFQUFFO1FBQ1gsTUFBTSxDQUFDLFNBQVMsQ0FBQyxJQUFBLGFBQU0sRUFBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLEVBQUUsSUFBQSxvQkFBYSxFQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUM7UUFDbEQsTUFBTSxDQUFDLFNBQVMsQ0FBQyxJQUFBLGFBQU0sRUFBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLEVBQUUsSUFBQSxvQkFBYSxFQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ25ELE1BQU0sQ0FBQyxTQUFTLENBQUMsSUFBQSxhQUFNLEVBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxFQUFFLElBQUEsb0JBQWEsRUFBQyxDQUFDLENBQUMsRUFBRSxDQUFDLEVBQUUsQ0FBQyxFQUFFLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFDL0QsTUFBTSxDQUFDLFNBQVMsQ0FBQyxJQUFBLGFBQU0sRUFBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLEVBQUUsSUFBQSxvQkFBYSxFQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsRUFBRSxDQUFDLEVBQUUsQ0FBQyxFQUFFLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7SUFDcEUsQ0FBQyxDQUFDLENBQUM7SUFFSCxFQUFFLENBQUMsVUFBVSxFQUFFO1FBQ2IsTUFBTSxDQUFDLFNBQVMsQ0FBQyxJQUFBLGVBQVEsRUFBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLEVBQUUsSUFBQSxvQkFBYSxFQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUM7UUFDcEQsTUFBTSxDQUFDLFNBQVMsQ0FBQyxJQUFBLGVBQVEsRUFBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLEVBQUUsSUFBQSxvQkFBYSxFQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUM7UUFDcEQsTUFBTSxDQUFDLFNBQVMsQ0FBQyxJQUFBLGVBQVEsRUFBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLEVBQUUsSUFBQSxvQkFBYSxFQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ3JELE1BQU0sQ0FBQyxTQUFTLENBQUMsSUFBQSxlQUFRLEVBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxFQUFFLElBQUEsb0JBQWEsRUFBQyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFDeEQsTUFBTSxDQUFDLFNBQVMsQ0FBQyxJQUFBLGVBQVEsRUFBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLEVBQUUsSUFBQSxvQkFBYSxFQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFDM0QsTUFBTSxDQUFDLFNBQVMsQ0FBQyxJQUFBLGVBQVEsRUFBQyxDQUFDLEVBQUUsRUFBRSxDQUFDLEVBQUUsSUFBQSxvQkFBYSxFQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsRUFBRSxDQUFDLEVBQUUsQ0FBQyxFQUFFLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQztJQUNyRSxDQUFDLENBQUMsQ0FBQztJQUVILEVBQUUsQ0FBQyxXQUFXLEVBQUU7UUFDZCxNQUFNLENBQUMsU0FBUyxDQUFDLElBQUEsZ0JBQVMsRUFBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLEVBQUUsSUFBQSxvQkFBYSxFQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUM7UUFDckQsTUFBTSxDQUFDLFNBQVMsQ0FBQyxJQUFBLGdCQUFTLEVBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxFQUFFLElBQUEsb0JBQWEsRUFBQyxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUN0RCxNQUFNLENBQUMsU0FBUyxDQUFDLElBQUEsZ0JBQVMsRUFBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLEVBQUUsSUFBQSxvQkFBYSxFQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUM7UUFDckQsTUFBTSxDQUFDLFNBQVMsQ0FBQyxJQUFBLGdCQUFTLEVBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxFQUFFLElBQUEsb0JBQWEsRUFBQyxDQUFDLENBQUMsRUFBRSxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQzVELE1BQU0sQ0FBQyxTQUFTLENBQUMsSUFBQSxnQkFBUyxFQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsRUFBRSxJQUFBLG9CQUFhLEVBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxFQUFFLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDLENBQUM7UUFDL0QsTUFBTSxDQUFDLFNBQVMsQ0FBQyxJQUFBLGdCQUFTLEVBQUMsQ0FBQyxFQUFFLEVBQUUsQ0FBQyxFQUFFLElBQUEsb0JBQWEsRUFBQyxDQUFDLENBQUMsRUFBRSxDQUFDLEVBQUUsQ0FBQyxFQUFFLEVBQUUsRUFBRSxFQUFFLENBQUMsQ0FBQyxDQUFDLENBQUM7SUFDdkUsQ0FBQyxDQUFDLENBQUM7SUFFSCxFQUFFLENBQUMsY0FBYyxFQUFFO1FBQ2pCLE1BQU0sQ0FBQyxTQUFTLENBQUMsSUFBQSxtQkFBWSxFQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsRUFBRSxJQUFBLG9CQUFhLEVBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQztRQUN4RCxNQUFNLENBQUMsU0FBUyxDQUFDLElBQUEsbUJBQVksRUFBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLEVBQUUsSUFBQSxvQkFBYSxFQUFDLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ3pELE1BQU0sQ0FBQyxTQUFTLENBQUMsSUFBQSxtQkFBWSxFQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsRUFBRSxJQUFBLG9CQUFhLEVBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQztRQUN4RCxNQUFNLENBQUMsU0FBUyxDQUFDLElBQUEsbUJBQVksRUFBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLEVBQUUsSUFBQSxvQkFBYSxFQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsRUFBRSxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsQ0FBQyxDQUFDO1FBQ2xFLE1BQU0sQ0FBQyxTQUFTLENBQUMsSUFBQSxtQkFBWSxFQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsRUFBRSxJQUFBLG9CQUFhLEVBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLENBQUMsQ0FBQztRQUMvRCxNQUFNLENBQUMsU0FBUyxDQUFDLElBQUEsbUJBQVksRUFBQyxDQUFDLEVBQUUsRUFBRSxDQUFDLEVBQUUsSUFBQSxvQkFBYSxFQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsRUFBRSxDQUFDLEVBQUUsRUFBRSxDQUFDLENBQUMsQ0FBQyxDQUFDO0lBQ3RFLENBQUMsQ0FBQyxDQUFDO0FBRUwsQ0FBQyxDQUFDLENBQUMifQ==
